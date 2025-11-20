@@ -1,0 +1,28 @@
+/* client/src/styles/index.css */
+@import "tailwindcss";
+:root {
+  background-color: #050505;
+  color: white;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Ensure smooth scrolling behavior */
+  scroll-behavior: smooth;
+  /* Premium text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Selection Color based on your design */
+::selection {
+  background-color: rgba(128, 128, 0, 0.3); /* Olive with opacity */
+  color: white;
+}
+
+/* Hide scrollbar for cleaner UI in certain areas if needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
