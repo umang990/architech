@@ -24,10 +24,9 @@ const StepSection = ({ id, title, description, imgSrc, alt, reverse = false }) =
 const HowItWorks = () => {
   const { theme } = useTheme();
   
-  // Dark: Digital Blueprint. Light: Clean Office/Sketch.
   const bgImg = theme === 'dark'
     ? "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop"
-    : "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=2070&auto=format&fit=crop";
+    : "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop";
 
   return (
     <div id="how-it-works" className="w-full bg-[var(--bg-primary)] relative overflow-hidden">
@@ -57,6 +56,7 @@ const HowItWorks = () => {
         id="03"
         title="Deploy & Scale"
         description="Review your code in our integrated IDE, then export a Dockerized container ready for AWS or Vercel."
+        // FIX: Replaced the problematic image with a more reliable "Server" image
         imgSrc="https://images.unsplash.com/photo-1558494949-efc02570fbc9?q=80&w=2070&auto=format&fit=crop"
         alt="Deployment Phase"
       />

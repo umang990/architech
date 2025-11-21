@@ -1,16 +1,22 @@
-// server/server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser'); 
 const connectDB = require('./config/db');
 const aiRoutes = require('./routes/aiRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json()); // Parse JSON bodies
+app.use(cors({
+  // FIX: Allow both common Vite ports to prevent CORS errors
+  origin: ['http://localhost:5173', 'http://localhost:3000'], 
+  credentials: true 
+}));
+app.use(express.json());
+app.use(cookieParser());
 
 // Database Connection
 connectDB();
@@ -18,6 +24,7 @@ connectDB();
 // Routes
 app.use('/api/ai', aiRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/auth', authRoutes);
 
 // Base Route
 app.get('/', (req, res) => {

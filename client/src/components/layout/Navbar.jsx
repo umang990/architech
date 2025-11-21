@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
-const Navbar = () => {
+const Navbar = ({ onLogin }) => { // Accept onLogin prop
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -40,7 +40,10 @@ const Navbar = () => {
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
         
-        <button className="hidden md:block px-5 py-2 bg-[var(--text-primary)] text-[var(--bg-primary)] text-xs uppercase tracking-widest rounded-full font-mono transition-transform hover:scale-105">
+        <button 
+          onClick={onLogin} // Connect the click handler
+          className="hidden md:block px-5 py-2 bg-[var(--text-primary)] text-[var(--bg-primary)] text-xs uppercase tracking-widest rounded-full font-mono transition-transform hover:scale-105"
+        >
           Login
         </button>
       </div>

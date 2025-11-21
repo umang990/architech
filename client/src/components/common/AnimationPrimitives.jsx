@@ -36,7 +36,6 @@ export const ParallaxImage = ({ src, alt, className = '' }) => {
     offset: ['start end', 'end start'],
   });
 
-  // Restored deeper parallax effect
   const y = useTransform(scrollYProgress, [0, 1], ['-15%', '15%']);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
@@ -46,15 +45,15 @@ export const ParallaxImage = ({ src, alt, className = '' }) => {
         src={src}
         alt={alt}
         style={{ y, scale }}
-        // RESTORED: Entrance Animation (Blur + Fade + Scale Down)
         initial={{ opacity: 0, scale: 1.15, filter: "blur(10px)" }}
         whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         viewport={{ once: true, margin: "-10%" }}
         className="w-full h-full object-cover will-change-transform"
         onError={(e) => {
-           // Fallback if image fails
-           e.target.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop";
+           // FIX: Fallback to a reliable placeholder if Unsplash fails (DNS/Network issues)
+           e.target.onerror = null; // Prevent infinite loop
+           e.target.src = "https://placehold.co/800x600/1a1a1a/666666?text=Image+Unavailable";
         }}
       />
       <div className="absolute inset-0 bg-black/10 pointer-events-none" />
@@ -78,8 +77,10 @@ export const BackgroundParallax = ({ src, opacity = 0.2 }) => {
           alt="background" 
           className="w-full h-full object-cover transition-opacity duration-700"
           style={{ opacity }}
+          onError={(e) => {
+             e.target.style.display = 'none'; // Hide background if it fails to load
+          }}
         />
-        {/* Gradient fade to match theme background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-primary)] via-transparent to-[var(--bg-primary)]" />
       </motion.div>
     </div>
